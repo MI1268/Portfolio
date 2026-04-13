@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>김유림 | MD Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root{
+      --bg:#f6f1e8;
+      --paper:#fffdf8;
+      --paper-2:#f3eadc;
+      --line:#dfd3c0;
+      --text:#2d2926;
+      --sub:#6f655c;
+      --brown:#5b4636;
+      --brown-soft:#7a6453;
+      --olive:#8a9473;
+      --shadow:0 14px 35px rgba(64, 47, 33, 0.08);
+      --shadow-soft:0 8px 20px rgba(64, 47, 33, 0.06);
+      --radius:22px;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      margin:0;
+      font-family:'Noto Sans KR', sans-serif;
+      background:
+        radial-gradient(circle at top left, rgba(255,255,255,0.7), transparent 28%),
+        linear-gradient(to bottom, #f8f4ed, var(--bg));
+      color:var(--text);
+      line-height:1.75;
+      letter-spacing:-0.01em;
+    }
+
+    img{
+      max-width:100%;
+      display:block;
+    }
+
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
+
+    .container{
+      width:min(1140px, 92%);
+      margin:0 auto;
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:50;
+      backdrop-filter:blur(10px);
+      background:rgba(246, 241, 232, 0.82);
+      border-bottom:1px solid rgba(91, 70, 54, 0.08);
+    }
+
+    .topbar-inner{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      min-height:72px;
+      gap:20px;
+    }
+
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      font-weight:700;
+      color:var(--brown);
+    }
+
+    .brand-dot{
+      width:11px;
+      height:11px;
+      border-radius:50%;
+      background:var(--olive);
+      box-shadow:0 0 0 6px rgba(138, 148, 115, 0.12);
+    }
+
+    .nav{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .nav a{
+      font-size:14px;
+      color:var(--sub);
+      padding:8px 12px;
+      border-radius:999px;
+      transition:0.25s ease;
+    }
+
+    .nav a:hover{
+      background:rgba(91, 70, 54, 0.06);
+      color:var(--brown);
+    }
+
+    .hero{
+      padding:58px 0 34px;
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.2fr 0.8fr;
+      gap:30px;
+      align-items:stretch;
+    }
+
+    .hero-main{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:32px;
+      padding:42px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .hero-main::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(135deg, rgba(91,70,54,0.03), transparent 40%),
+        radial-gradient(circle at 80% 18%, rgba(138,148,115,0.10), transparent 22%);
+      pointer-events:none;
+    }
+
+    .hero-note{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 14px;
+      border:1px solid #e4d8c8;
+      background:#fbf7f0;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--brown);
+      margin-bottom:18px;
+      font-weight:600;
+    }
+
+    .hero h1{
+      margin:0 0 18px;
+      font-size:clamp(36px, 5vw, 66px);
+      line-height:1.12;
+      letter-spacing:-0.04em;
+    }
+
+    .hero h1 span{
+      color:var(--brown-soft);
+    }
+
+    .hero-desc{
+      max-width:680px;
+      font-size:17px;
+      color:#564f48;
+      margin-bottom:28px;
+    }
+
+    .hero-tags{
+      display:flex;
+      flex-wrap:wrap;
+      gap:10px;
+    }
+
+    .tag{
+      padding:10px 14px;
+      background:#f3ebdf;
+      border:1px solid #e2d4bf;
+      border-radius:999px;
+      font-size:13px;
+      color:var(--brown);
+      font-weight:600;
+    }
+
+    .hero-side{
+      display:grid;
+      gap:20px;
+    }
+
+    .polaroid{
+      background:#fff;
+      border:1px solid #eadfce;
+      border-radius:22px;
+      padding:16px 16px 24px;
+      box-shadow:var(--shadow);
+      transform:rotate(-1.2deg);
+    }
+
+    .photo-box{
+      aspect-ratio:4/5;
+      border-radius:14px;
+      background:
+        linear-gradient(135deg, rgba(122,100,83,0.15), rgba(138,148,115,0.14)),
+        #ece5da;
+      border:1px solid #e2d7c6;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:var(--brown-soft);
+      font-size:14px;
+      font-weight:600;
+      overflow:hidden;
+    }
+
+    .polaroid-caption{
+      text-align:center;
+      margin-top:14px;
+      font-size:14px;
+      color:var(--sub);
+      font-weight:600;
+    }
+
+    .memo{
+      background:linear-gradient(180deg, #fbf7f0, #f6efe4);
+      border:1px solid #e6dac8;
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+    }
+
+    .memo::before{
+      content:"";
+      position:absolute;
+      top:14px;
+      right:18px;
+      width:72px;
+      height:22px;
+      background:rgba(138,148,115,0.18);
+      border-radius:6px;
+      transform:rotate(7deg);
+    }
+
+    .memo h3{
+      margin:0 0 12px;
+      font-size:18px;
+      color:var(--brown);
+    }
+
+    .memo ul{
+      margin:0;
+      padding-left:18px;
+      color:#5b544d;
+      font-size:15px;
+    }
+
+    main{
+      padding:10px 0 80px;
+    }
+
+    .section{
+      margin-top:24px;
+    }
+
+    .section-head{
+      display:flex;
+      justify-content:space-between;
+      align-items:end;
+      gap:20px;
+      margin-bottom:18px;
+    }
+
+    .section-title{
+      margin:0;
+      font-size:30px;
+      letter-spacing:-0.03em;
+      color:var(--brown);
+    }
+
+    .section-sub{
+      margin:0;
+      color:var(--sub);
+      font-size:15px;
+    }
+
+    .paper{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:28px;
+      box-shadow:var(--shadow-soft);
+      overflow:hidden;
+    }
+
+    .about-wrap{
+      display:grid;
+      grid-template-columns:0.95fr 1.05fr;
+      gap:0;
+    }
+
+    .about-visual{
+      padding:28px;
+      border-right:1px solid #eadfce;
+      background:
+        linear-gradient(180deg, rgba(243,234,220,0.65), rgba(255,253,248,0.9));
+    }
+
+    .photo-grid{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:16px;
+    }
+
+    .mini-photo{
+      background:#fff;
+      border:1px solid #eadfce;
+      border-radius:18px;
+      padding:10px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .mini-photo .ph{
+      aspect-ratio:1/1;
+      border-radius:12px;
+      background:
+        linear-gradient(135deg, rgba(122,100,83,0.12), rgba(138,148,115,0.16)),
+        #eee5d8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#7d7368;
+      font-size:13px;
+      font-weight:600;
+    }
+
+    .mini-photo p{
+      margin:10px 2px 2px;
+      font-size:13px;
+      color:var(--sub);
+      text-align:center;
+      font-weight:600;
+    }
+
+    .about-text{
+      padding:34px;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .about-text h3{
+      margin:0 0 14px;
+      font-size:28px;
+      line-height:1.3;
+      letter-spacing:-0.03em;
+    }
+
+    .about-text p{
+      margin:0 0 14px;
+      color:#514a44;
+      font-size:16px;
+    }
+
+    .about-list{
+      display:grid;
+      grid-template-columns:repeat(2, minmax(0,1fr));
+      gap:12px;
+      margin-top:10px;
+    }
+
+    .about-item{
+      background:#faf5ec;
+      border:1px solid #eadfce;
+      border-radius:16px;
+      padding:14px 16px;
+    }
+
+    .about-item strong{
+      display:block;
+      font-size:14px;
+      color:var(--brown);
+      margin-bottom:4px;
+    }
+
+    .about-item span{
+      font-size:14px;
+      color:var(--sub);
+    }
+
+    .strength-grid{
+      display:grid;
+      grid-template-columns:repeat(3, 1fr);
+      gap:18px;
+    }
+
+    .strength-card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .strength-num{
+      font-size:13px;
+      color:var(--olive);
+      font-weight:700;
+      margin-bottom:10px;
+    }
+
+    .strength-card h3{
+      margin:0 0 10px;
+      font-size:21px;
+      color:var(--brown);
+    }
+
+    .strength-card p{
+      margin:0;
+      color:#585048;
+      font-size:15px;
+    }
+
+    .timeline{
+      display:grid;
+      gap:18px;
+    }
+
+    .timeline-item{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:24px;
+      padding:24px 24px 22px;
+      box-shadow:var(--shadow-soft);
+      position:relative;
+    }
+
+    .timeline-item::before{
+      content:"";
+      position:absolute;
+      left:24px;
+      top:24px;
+      width:10px;
+      height:10px;
+      border-radius:50%;
+      background:var(--olive);
+      box-shadow:0 0 0 6px rgba(138,148,115,0.12);
+    }
+
+    .timeline-top{
+      display:flex;
+      justify-content:space-between;
+      gap:18px;
+      padding-left:28px;
+      margin-bottom:10px;
+      flex-wrap:wrap;
+    }
+
+    .timeline-top h3{
+      margin:0;
+      font-size:22px;
+      color:var(--brown);
+    }
+
+    .timeline-date{
+      font-size:14px;
+      color:var(--sub);
+      font-weight:600;
+      background:#f4ece0;
+      border:1px solid #e7dac5;
+      padding:7px 12px;
+      border-radius:999px;
+      align-self:flex-start;
+    }
+
+    .timeline-item p{
+      margin:0 0 12px;
+      padding-left:28px;
+      color:#574f47;
+      font-size:15px;
+    }
+
+    .timeline-points{
+      margin:0;
+      padding-left:48px;
+      color:#5b544c;
+      font-size:14px;
+    }
+
+    .timeline-points li + li{
+      margin-top:6px;
+    }
+
+    .project-grid{
+      display:grid;
+      grid-template-columns:repeat(2, 1fr);
+      gap:20px;
+    }
+
+    .project-card{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:26px;
+      overflow:hidden;
+      box-shadow:var(--shadow-soft);
+    }
+
+    .project-image{
+      aspect-ratio:16/10;
+      background:
+        linear-gradient(135deg, rgba(91,70,54,0.10), rgba(138,148,115,0.16)),
+        #ebe3d7;
+      border-bottom:1px solid #eadfce;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#6f655c;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .project-body{
+      padding:22px;
+    }
+
+    .project-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-bottom:12px;
+    }
+
+    .chip{
+      font-size:12px;
+      padding:7px 11px;
+      border-radius:999px;
+      border:1px solid #e2d4bf;
+      background:#f3ebdf;
+      color:var(--brown);
+      font-weight:700;
+    }
+
+    .project-card h3{
+      margin:0 0 10px;
+      font-size:22px;
+      color:var(--brown);
+    }
+
+    .project-card p{
+      margin:0 0 14px;
+      color:#574f47;
+      font-size:15px;
+    }
+
+    .project-list{
+      margin:0;
+      padding-left:18px;
+      color:#5a524a;
+      font-size:14px;
+    }
+
+    .project-list li + li{
+      margin-top:6px;
+    }
+
+    .contact-wrap{
+      display:grid;
+      grid-template-columns:1fr 0.9fr;
+      gap:18px;
+    }
+
+    .contact-card{
+      background:linear-gradient(135deg, #5b4636, #77614f);
+      color:white;
+      border-radius:30px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      position:relative;
+      overflow:hidden;
+    }
+
+    .contact-card::before{
+      content:"";
+      position:absolute;
+      width:220px;
+      height:220px;
+      border-radius:50%;
+      right:-70px;
+      top:-70px;
+      background:rgba(255,255,255,0.08);
+    }
+
+    .contact-card h2{
+      position:relative;
+      margin:0 0 12px;
+      font-size:34px;
+      letter-spacing:-0.03em;
+    }
+
+    .contact-card p{
+      position:relative;
+      margin:0 0 20px;
+      color:rgba(255,255,255,0.86);
+    }
+
+    .contact-info{
+      position:relative;
+      display:grid;
+      gap:10px;
+      font-size:15px;
+    }
+
+    .contact-info div{
+      padding:12px 14px;
+      border-radius:14px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(255,255,255,0.12);
+    }
+
+    .contact-note{
+      background:var(--paper);
+      border:1px solid var(--line);
+      border-radius:30px;
+      padding:30px;
+      box-shadow:var(--shadow-soft);
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
+    }
+
+    .contact-note h3{
+      margin:0 0 10px;
+      color:var(--brown);
+      font-size:22px;
+    }
+
+    .contact-note p{
+      margin:0 0 14px;
+      color:#5b544c;
+      font-size:15px;
+    }
+
+    .contact-note ul{
+      margin:0;
+      padding-left:18px;
+      color:#5b544c;
+      font-size:14px;
+    }
+
+    footer{
+      padding:34px 0 56px;
+      text-align:center;
+      color:#8d8379;
+      font-size:13px;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .about-wrap,
+      .contact-wrap{
+        grid-template-columns:1fr;
+      }
+
+      .about-visual{
+        border-right:none;
+        border-bottom:1px solid #eadfce;
+      }
+
+      .strength-grid,
+      .project-grid{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 720px){
+      .topbar-inner{
+        flex-direction:column;
+        justify-content:center;
+        padding:12px 0;
+      }
+
+      .hero{
+        padding-top:34px;
+      }
+
+      .hero-main,
+      .about-text,
+      .contact-card,
+      .contact-note{
+        padding:24px;
+      }
+
+      .hero h1{
+        font-size:38px;
+      }
+
+      .section-title{
+        font-size:25px;
+      }
+
+      .about-text h3{
+        font-size:24px;
+      }
+
+      .about-list{
+        grid-template-columns:1fr;
+      }
+
+      .photo-grid{
+        grid-template-columns:1fr 1fr;
+      }
+    }
+
+    @media (max-width: 520px){
+      .container{
+        width:min(94%, 1140px);
+      }
+
+      .hero h1{
+        font-size:32px;
+      }
+
+      .photo-grid{
+        grid-template-columns:1fr;
+      }
+
+      .nav{
+        justify-content:center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <div class="brand">
+        <span class="brand-dot"></span>
+        <span>YURIM PORTFOLIO</span>
+      </div>
+      <nav class="nav">
+        <nav class="nav">
+  <a href="#about">소개</a>
+  <a href="#strength">강점</a>
+  <a href="#experience">경험</a>
+  <a href="#projects">프로젝트</a>
+  <a href="#contact">연락처</a>
+</nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-main">
+        <div class="hero-note">MD / Marketing Portfolio</div>
+        <h1>
+          소비자 관점과 운영 경험으로<br />
+          <span>상품의 가치를 전달하는</span><br />
+          김유림입니다.
+        </h1>
+        <p class="hero-desc">
+          라이브커머스 운영, 콘텐츠 제작, 프로모션 진행, 거래처 커뮤니케이션,
+          그리고 엑셀 기반 데이터 관리 경험을 바탕으로
+          상품이 기획되고 소비자에게 전달되는 흐름을 실무에서 가까이 경험했습니다.
+        </p>
+        <div class="hero-tags">
+          <span class="tag">Live Commerce</span>
+          <span class="tag">Content</span>
+          <span class="tag">Promotion</span>
+          <span class="tag">Excel Data</span>
+          <span class="tag">Communication</span>
+        </div>
+      </div>
+
+      <div class="hero-side">
+        <div class="polaroid">
+          <div class="photo-box">
+            여기에 대표 사진 넣기<br />
+            (파일명 예: profile.jpg)
+          </div>
+          <div class="polaroid-caption">Yurim's Mood Board</div>
+        </div>
+
+        <div class="memo">
+          <h3>핵심 포인트</h3>
+          <ul>
+            <li>상품이 소비자에게 전달되는 과정을 실무에서 경험</li>
+            <li>촬영 준비, 콘텐츠 제작, 프로모션 운영 지원</li>
+            <li>거래처와의 커뮤니케이션 및 협업 경험</li>
+            <li>엑셀을 활용한 매출 및 운영 데이터 정리</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <main>
+    <div class="container">
+      <section class="section" id="about">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">About Me</h2>
+            <p class="section-sub">사진과 소개를 함께 담은 첫 페이지</p>
+          </div>
+        </div>
+
+        <div class="paper about-wrap">
+          <div class="about-visual">
+            <div class="photo-grid">
+              <div class="mini-photo">
+                <div class="ph">프로필 사진</div>
+                <p>profile 01</p>
+              </div>
+              <div class="mini-photo">
+                <div class="ph">활동 사진</div>
+                <p>activity 01</p>
+              </div>
+              <div class="mini-photo">
+                <div class="ph">프로젝트 이미지</div>
+                <p>project 01</p>
+              </div>
+              <div class="mini-photo">
+                <div class="ph">무드 사진</div>
+                <p>mood 01</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="about-text">
+            <h3>
+              상품을 이해하고,<br />
+              소비자에게 더 잘 전달되는 방식을 고민해왔습니다.
+            </h3>
+            <p>
+              라이브커머스 운영과 상품 기획 관련 실무를 경험하며
+              상품이 기획되고 판매되기까지의 흐름을 가까이에서 접했습니다.
+              촬영 준비, 콘텐츠 제작, 프로모션 진행 등 다양한 업무를 지원하며
+              판매 과정 전반에 대한 이해를 쌓았습니다.
+            </p>
+            <p>
+              또한 거래처와의 커뮤니케이션, 운영 지원, 엑셀 기반 데이터 정리를 통해
+              실무에서 필요한 협업 능력과 꼼꼼함도 함께 길렀습니다.
+              앞으로는 식품 및 라이프스타일 분야에서
+              브랜드와 함께 성장하는 MD가 되고 싶습니다.
+            </p>
+
+            <div class="about-list">
+              <div class="about-item">
+                <strong>관심 분야</strong>
+                <span>식품 / 라이프스타일 / 소비재</span>
+              </div>
+              <div class="about-item">
+                <strong>업무 스타일</strong>
+                <span>꼼꼼함, 정리력, 협업 중심</span>
+              </div>
+              <div class="about-item">
+                <strong>강점</strong>
+                <span>운영 이해, 커뮤니케이션, 데이터 정리</span>
+              </div>
+              <div class="about-item">
+                <strong>목표</strong>
+                <span>소비자 관점의 MD로 성장하기</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="strength">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Core Strengths</h2>
+            <p class="section-sub">지원 직무와 연결되는 강점을 간결하게 정리</p>
+          </div>
+        </div>
+
+        <div class="strength-grid">
+          <article class="strength-card">
+            <div class="strength-num">01</div>
+            <h3>상품 운영 이해</h3>
+            <p>
+              상품이 기획되고 소비자에게 전달되는 흐름을 실무에서 경험하며
+              판매 운영 전반에 대한 이해도를 쌓았습니다.
+            </p>
+          </article>
+
+          <article class="strength-card">
+            <div class="strength-num">02</div>
+            <h3>커뮤니케이션</h3>
+            <p>
+              거래처 및 내부 구성원과의 소통을 통해
+              협업의 중요성과 원활한 업무 진행 방식을 익혔습니다.
+            </p>
+          </article>
+
+          <article class="strength-card">
+            <div class="strength-num">03</div>
+            <h3>데이터 정리</h3>
+            <p>
+              엑셀을 활용해 매출 및 운영 비용 데이터를 정리하며
+              실무에서 필요한 정확성과 꼼꼼함을 길렀습니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Experience</h2>
+            <p class="section-sub">경험을 흐름 중심으로 보여주는 노트형 구성</p>
+          </div>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item">
+            <div class="timeline-top">
+              <h3>라이브커머스 운영 및 콘텐츠 제작 지원</h3>
+              <span class="timeline-date">약 6개월</span>
+            </div>
+            <p>
+              상품 촬영 준비, 콘텐츠 제작, 프로모션 진행 등을 지원하며
+              라이브커머스 운영 흐름을 실무에서 경험했습니다.
+            </p>
+            <ul class="timeline-points">
+              <li>상품 촬영 전 준비 및 운영 보조</li>
+              <li>콘텐츠 제작 및 프로모션 진행 지원</li>
+              <li>소비자에게 상품을 전달하는 표현 방식 이해</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-top">
+              <h3>거래처 커뮤니케이션 및 운영 지원</h3>
+              <span class="timeline-date">실무 경험</span>
+            </div>
+            <p>
+              거래처와의 커뮤니케이션을 통해 업무 진행 상황을 공유하고
+              실무 협업을 지원했습니다.
+            </p>
+            <ul class="timeline-points">
+              <li>업무 진행 내용 공유 및 커뮤니케이션</li>
+              <li>원활한 협업을 위한 일정 및 내용 정리</li>
+              <li>업무 효율에 중요한 소통의 역할 체감</li>
+            </ul>
+          </article>
+
+          <article class="timeline-item">
+            <div class="timeline-top">
+              <h3>엑셀 기반 매출 및 운영 비용 관리</h3>
+              <span class="timeline-date">약 6개월+</span>
+            </div>
+            <p>
+              엑셀을 활용해 매출 및 운영 비용 관련 자료를 정리하고 관리하며
+              데이터 기반으로 업무를 보는 습관을 길렀습니다.
+            </p>
+            <ul class="timeline-points">
+              <li>매출 데이터 및 운영 비용 자료 정리</li>
+              <li>기록 중심의 운영 보조 경험</li>
+              <li>정확성과 꼼꼼함이 필요한 실무 경험</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="projects">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Projects</h2>
+            <p class="section-sub">사진 카드처럼 보이도록 구성한 프로젝트 영역</p>
+          </div>
+        </div>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-image">
+              프로젝트 이미지 영역 01
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="chip">Live Commerce</span>
+                <span class="chip">Content</span>
+                <span class="chip">Promotion</span>
+              </div>
+              <h3>라이브커머스 운영 지원 경험</h3>
+              <p>
+                상품 판매 과정에 참여하며 소비자 반응과 콘텐츠 구성이
+                판매 흐름에 어떤 영향을 주는지 직접 경험했습니다.
+              </p>
+              <ul class="project-list">
+                <li>상품 촬영 준비 및 운영 보조</li>
+                <li>콘텐츠 제작 및 프로모션 진행 지원</li>
+                <li>상품 특징 전달 방식 검토</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="project-card">
+            <div class="project-image">
+              프로젝트 이미지 영역 02
+            </div>
+            <div class="project-body">
+              <div class="project-meta">
+                <span class="chip">Excel</span>
+                <span class="chip">Data</span>
+                <span class="chip">Operation</span>
+              </div>
+              <h3>운영 데이터 정리 경험</h3>
+              <p>
+                엑셀을 기반으로 운영 관련 데이터를 정리하며
+                실무에 필요한 정확성과 기록 관리의 중요성을 익혔습니다.
+              </p>
+              <ul class="project-list">
+                <li>매출 및 운영 비용 자료 정리</li>
+                <li>기록 기반 업무 보조</li>
+                <li>데이터 정리를 통한 업무 효율 지원</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section" id="contact">
+        <div class="section-head">
+          <div>
+            <h2 class="section-title">Contact</h2>
+            <p class="section-sub">마지막까지 정리된 인상을 주는 마무리 페이지</p>
+          </div>
+        </div>
+
+        <div class="contact-wrap">
+          <div class="contact-card">
+            <h2>Let’s work together</h2>
+            <p>
+              소비자 관점과 운영 경험을 바탕으로
+              브랜드와 함께 성장하는 MD가 되고 싶습니다.
+            </p>
+            <div class="contact-info">
+              <div><strong>이름</strong> · 김유림</div>
+              <div><strong>Email</strong> · yourmail@example.com</div>
+              <div><strong>Phone</strong> · 010-0000-0000</div>
+              <div><strong>Portfolio</strong> · 웹 링크 또는 깃허브 주소</div>
+            </div>
+          </div>
+
+          <div class="contact-note">
+            <h3>마무리 문구 예시</h3>
+            <p>
+              상품과 소비자를 연결하는 과정에 늘 관심을 가져왔고,
+              실무 경험을 통해 그 흐름을 직접 이해할 수 있었습니다.
+              앞으로도 꼼꼼한 운영과 좋은 협업을 바탕으로
+              브랜드에 기여하는 MD가 되겠습니다.
+            </p>
+            <ul>
+              <li>이 영역은 지원 회사에 맞게 문장을 조금씩 수정해도 좋아</li>
+              <li>식품, 라이프스타일, 뷰티 등 지원 분야에 따라 키워드만 바꾸면 됨</li>
+              <li>포트폴리오 링크나 노션 주소도 함께 넣을 수 있음</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    © 2026 KIM YURIM PORTFOLIO. All rights reserved.
+  </footer>
+</body>
+</html>
