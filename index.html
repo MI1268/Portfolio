@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>김유림 | MD Portfolio</title>
+  <title>김유림 | MD 포트폴리오</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet" />
@@ -20,7 +20,14 @@
       --olive:#8a9473;
       --shadow:0 14px 35px rgba(64, 47, 33, 0.08);
       --shadow-soft:0 8px 20px rgba(64, 47, 33, 0.06);
+      --shadow-deep:
+        0 8px 20px rgba(0,0,0,0.04),
+        0 24px 55px rgba(0,0,0,0.07);
+      --shadow-hover:
+        0 14px 28px rgba(0,0,0,0.06),
+        0 34px 70px rgba(0,0,0,0.10);
       --radius:22px;
+      --ease:cubic-bezier(.22,.61,.36,1);
     }
 
     *{
@@ -57,6 +64,20 @@
       margin:0 auto;
     }
 
+    .reveal{
+      opacity:0;
+      transform:translateY(28px);
+      transition:
+        opacity 0.8s var(--ease),
+        transform 0.8s var(--ease);
+      will-change:transform, opacity;
+    }
+
+    .reveal.show{
+      opacity:1;
+      transform:translateY(0);
+    }
+
     .topbar{
       position:sticky;
       top:0;
@@ -80,6 +101,7 @@
       gap:12px;
       font-weight:700;
       color:var(--brown);
+      letter-spacing:-0.02em;
     }
 
     .brand-dot{
@@ -97,6 +119,7 @@
     }
 
     .nav a{
+      position:relative;
       font-size:14px;
       color:var(--sub);
       padding:8px 12px;
@@ -104,9 +127,25 @@
       transition:0.25s ease;
     }
 
+    .nav a::after{
+      content:"";
+      position:absolute;
+      left:12px;
+      bottom:6px;
+      width:0;
+      height:2px;
+      border-radius:999px;
+      background:var(--olive);
+      transition:width 0.25s ease;
+    }
+
     .nav a:hover{
       background:rgba(91, 70, 54, 0.06);
       color:var(--brown);
+    }
+
+    .nav a:hover::after{
+      width:calc(100% - 24px);
     }
 
     .hero{
@@ -125,9 +164,19 @@
       border:1px solid var(--line);
       border-radius:32px;
       padding:42px;
-      box-shadow:var(--shadow);
+      box-shadow:
+        0 10px 30px rgba(0,0,0,0.05),
+        0 40px 80px rgba(0,0,0,0.06);
       position:relative;
       overflow:hidden;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .hero-main:hover{
+      transform:translateY(-4px);
+      box-shadow:
+        0 16px 32px rgba(0,0,0,0.06),
+        0 50px 90px rgba(0,0,0,0.08);
     }
 
     .hero-main::before{
@@ -152,20 +201,54 @@
       color:var(--brown);
       margin-bottom:18px;
       font-weight:600;
+      position:relative;
+      z-index:1;
     }
 
-    .hero h1{
+    .hero-title{
       margin:0 0 18px;
-      font-size:clamp(36px, 5vw, 66px);
-      line-height:1.12;
+      line-height:1.22;
       letter-spacing:-0.04em;
+      position:relative;
+      z-index:1;
     }
 
-    .hero h1 span{
-      color:var(--brown-soft);
+    .hero-small{
+      display:inline-block;
+      font-size:28px;
+      font-weight:500;
+      color:#5c534b;
+      margin-bottom:2px;
+    }
+
+    .hero-main-text{
+      display:inline-block;
+      font-size:56px;
+      font-weight:800;
+      color:#2d2926;
+    }
+
+    .hero-name{
+      display:inline-block;
+      font-size:30px;
+      font-weight:500;
+      color:#7a6453;
+      margin-top:4px;
+    }
+
+    .hero-sub{
+      position:relative;
+      z-index:1;
+      max-width:680px;
+      font-size:15px;
+      color:#7b7268;
+      margin:-2px 0 18px;
+      letter-spacing:-0.01em;
     }
 
     .hero-desc{
+      position:relative;
+      z-index:1;
       max-width:680px;
       font-size:17px;
       color:#564f48;
@@ -173,6 +256,8 @@
     }
 
     .hero-tags{
+      position:relative;
+      z-index:1;
       display:flex;
       flex-wrap:wrap;
       gap:10px;
@@ -186,6 +271,12 @@
       font-size:13px;
       color:var(--brown);
       font-weight:600;
+      transition:transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .tag:hover{
+      transform:translateY(-2px);
+      box-shadow:0 10px 18px rgba(0,0,0,0.06);
     }
 
     .hero-side{
@@ -198,8 +289,14 @@
       border:1px solid #eadfce;
       border-radius:22px;
       padding:16px 16px 24px;
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow-deep);
       transform:rotate(-1.2deg);
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .polaroid:hover{
+      transform:rotate(-0.4deg) translateY(-4px);
+      box-shadow:var(--shadow-hover);
     }
 
     .photo-box{
@@ -216,6 +313,8 @@
       font-size:14px;
       font-weight:600;
       overflow:hidden;
+      text-align:center;
+      padding:12px;
     }
 
     .polaroid-caption{
@@ -231,8 +330,14 @@
       border:1px solid #e6dac8;
       border-radius:24px;
       padding:24px;
-      box-shadow:var(--shadow-soft);
+      box-shadow:var(--shadow-deep);
       position:relative;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .memo:hover{
+      transform:translateY(-4px);
+      box-shadow:var(--shadow-hover);
     }
 
     .memo::before{
@@ -251,6 +356,8 @@
       margin:0 0 12px;
       font-size:18px;
       color:var(--brown);
+      position:relative;
+      z-index:1;
     }
 
     .memo ul{
@@ -258,6 +365,8 @@
       padding-left:18px;
       color:#5b544d;
       font-size:15px;
+      position:relative;
+      z-index:1;
     }
 
     main{
@@ -265,7 +374,7 @@
     }
 
     .section{
-      margin-top:24px;
+      margin-top:56px;
     }
 
     .section-head{
@@ -281,6 +390,19 @@
       font-size:30px;
       letter-spacing:-0.03em;
       color:var(--brown);
+      position:relative;
+      padding-left:16px;
+    }
+
+    .section-title::before{
+      content:"";
+      position:absolute;
+      left:0;
+      top:12px;
+      width:6px;
+      height:6px;
+      border-radius:50%;
+      background:var(--olive);
     }
 
     .section-sub{
@@ -293,8 +415,14 @@
       background:var(--paper);
       border:1px solid var(--line);
       border-radius:28px;
-      box-shadow:var(--shadow-soft);
+      box-shadow:var(--shadow-deep);
       overflow:hidden;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .paper:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow-hover);
     }
 
     .about-wrap{
@@ -312,8 +440,12 @@
 
     .photo-grid{
       display:grid;
-      grid-template-columns:1fr 1fr;
+      grid-template-columns:1.1fr 0.9fr;
       gap:16px;
+    }
+
+    .mini-photo:first-child{
+      grid-row:span 2;
     }
 
     .mini-photo{
@@ -322,6 +454,12 @@
       border-radius:18px;
       padding:10px;
       box-shadow:var(--shadow-soft);
+      transition:transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .mini-photo:hover{
+      transform:translateY(-4px);
+      box-shadow:0 18px 30px rgba(0,0,0,0.08);
     }
 
     .mini-photo .ph{
@@ -336,6 +474,12 @@
       color:#7d7368;
       font-size:13px;
       font-weight:600;
+      text-align:center;
+      padding:10px;
+    }
+
+    .mini-photo:first-child .ph{
+      aspect-ratio:4/5;
     }
 
     .mini-photo p{
@@ -378,6 +522,12 @@
       border:1px solid #eadfce;
       border-radius:16px;
       padding:14px 16px;
+      transition:transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .about-item:hover{
+      transform:translateY(-3px);
+      box-shadow:0 14px 24px rgba(0,0,0,0.06);
     }
 
     .about-item strong{
@@ -403,7 +553,13 @@
       border:1px solid var(--line);
       border-radius:24px;
       padding:24px;
-      box-shadow:var(--shadow-soft);
+      box-shadow:var(--shadow-deep);
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .strength-card:hover{
+      transform:translateY(-6px);
+      box-shadow:var(--shadow-hover);
     }
 
     .strength-num{
@@ -435,8 +591,14 @@
       border:1px solid var(--line);
       border-radius:24px;
       padding:24px 24px 22px;
-      box-shadow:var(--shadow-soft);
+      box-shadow:var(--shadow-deep);
       position:relative;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .timeline-item:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow-hover);
     }
 
     .timeline-item::before{
@@ -506,7 +668,15 @@
       border:1px solid var(--line);
       border-radius:26px;
       overflow:hidden;
-      box-shadow:var(--shadow-soft);
+      box-shadow:var(--shadow-deep);
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .project-card:hover{
+      transform:translateY(-8px);
+      box-shadow:
+        0 18px 36px rgba(0,0,0,0.07),
+        0 36px 72px rgba(0,0,0,0.10);
     }
 
     .project-image{
@@ -521,6 +691,8 @@
       color:#6f655c;
       font-size:14px;
       font-weight:700;
+      text-align:center;
+      padding:12px;
     }
 
     .project-body{
@@ -578,9 +750,15 @@
       color:white;
       border-radius:30px;
       padding:34px;
-      box-shadow:var(--shadow);
+      box-shadow:var(--shadow-deep);
       position:relative;
       overflow:hidden;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .contact-card:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow-hover);
     }
 
     .contact-card::before{
@@ -626,10 +804,16 @@
       border:1px solid var(--line);
       border-radius:30px;
       padding:30px;
-      box-shadow:var(--shadow-soft);
+      box-shadow:var(--shadow-deep);
       display:flex;
       flex-direction:column;
       justify-content:center;
+      transition:transform 0.35s ease, box-shadow 0.35s ease;
+    }
+
+    .contact-note:hover{
+      transform:translateY(-5px);
+      box-shadow:var(--shadow-hover);
     }
 
     .contact-note h3{
@@ -674,6 +858,18 @@
       .project-grid{
         grid-template-columns:1fr;
       }
+
+      .photo-grid{
+        grid-template-columns:1fr 1fr;
+      }
+
+      .mini-photo:first-child{
+        grid-row:auto;
+      }
+
+      .mini-photo:first-child .ph{
+        aspect-ratio:1/1;
+      }
     }
 
     @media (max-width: 720px){
@@ -694,8 +890,16 @@
         padding:24px;
       }
 
-      .hero h1{
-        font-size:38px;
+      .hero-small{
+        font-size:22px;
+      }
+
+      .hero-main-text{
+        font-size:42px;
+      }
+
+      .hero-name{
+        font-size:24px;
       }
 
       .section-title{
@@ -720,8 +924,16 @@
         width:min(94%, 1140px);
       }
 
-      .hero h1{
-        font-size:32px;
+      .hero-small{
+        font-size:20px;
+      }
+
+      .hero-main-text{
+        font-size:34px;
+      }
+
+      .hero-name{
+        font-size:22px;
       }
 
       .photo-grid{
@@ -739,49 +951,55 @@
     <div class="container topbar-inner">
       <div class="brand">
         <span class="brand-dot"></span>
-        <span>YURIM PORTFOLIO</span>
+        <span>김유림 포트폴리오</span>
       </div>
       <nav class="nav">
-        <nav class="nav">
-  <a href="#about">소개</a>
-  <a href="#strength">강점</a>
-  <a href="#experience">경험</a>
-  <a href="#projects">프로젝트</a>
-  <a href="#contact">연락처</a>
-</nav>
+        <a href="#about">소개</a>
+        <a href="#strength">강점</a>
+        <a href="#experience">경험</a>
+        <a href="#projects">프로젝트</a>
+        <a href="#contact">연락처</a>
+      </nav>
     </div>
   </header>
 
-  <section class="hero">
+  <section class="hero reveal">
     <div class="container hero-grid">
-      <div class="hero-main">
-        <div class="hero-note">MD / Marketing Portfolio</div>
-        <h1>
-          소비자 관점과 운영 경험으로<br />
-          <span>상품의 가치를 전달하는</span><br />
-          김유림입니다.
+      <div class="hero-main reveal">
+        <div class="hero-note">MD 포트폴리오</div>
+
+        <h1 class="hero-title">
+          <span class="hero-small">상품의 매력을 전달하고</span><br />
+          <span class="hero-main-text">그 가치를 만들어가는</span><br />
+          <span class="hero-name">김유림입니다</span>
         </h1>
+
+        <p class="hero-sub">
+          라이브커머스 · 콘텐츠 제작 · 상품 운영 · 데이터 관리
+        </p>
+
         <p class="hero-desc">
           라이브커머스 운영, 콘텐츠 제작, 프로모션 진행, 거래처 커뮤니케이션,
           그리고 엑셀 기반 데이터 관리 경험을 바탕으로
           상품이 기획되고 소비자에게 전달되는 흐름을 실무에서 가까이 경험했습니다.
         </p>
+
         <div class="hero-tags">
-          <span class="tag">Live Commerce</span>
-          <span class="tag">Content</span>
-          <span class="tag">Promotion</span>
-          <span class="tag">Excel Data</span>
-          <span class="tag">Communication</span>
+          <span class="tag">라이브커머스</span>
+          <span class="tag">콘텐츠 제작</span>
+          <span class="tag">프로모션</span>
+          <span class="tag">데이터 관리</span>
+          <span class="tag">커뮤니케이션</span>
         </div>
       </div>
 
-      <div class="hero-side">
+      <div class="hero-side reveal">
         <div class="polaroid">
           <div class="photo-box">
             여기에 대표 사진 넣기<br />
             (파일명 예: profile.jpg)
           </div>
-          <div class="polaroid-caption">Yurim's Mood Board</div>
+          <div class="polaroid-caption">Yurim Mood</div>
         </div>
 
         <div class="memo">
@@ -799,10 +1017,10 @@
 
   <main>
     <div class="container">
-      <section class="section" id="about">
+      <section class="section reveal" id="about">
         <div class="section-head">
           <div>
-            <h2 class="section-title">About Me</h2>
+            <h2 class="section-title">소개</h2>
             <p class="section-sub">사진과 소개를 함께 담은 첫 페이지</p>
           </div>
         </div>
@@ -869,10 +1087,10 @@
         </div>
       </section>
 
-      <section class="section" id="strength">
+      <section class="section reveal" id="strength">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Core Strengths</h2>
+            <h2 class="section-title">핵심 강점</h2>
             <p class="section-sub">지원 직무와 연결되는 강점을 간결하게 정리</p>
           </div>
         </div>
@@ -907,10 +1125,10 @@
         </div>
       </section>
 
-      <section class="section" id="experience">
+      <section class="section reveal" id="experience">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Experience</h2>
+            <h2 class="section-title">경험</h2>
             <p class="section-sub">경험을 흐름 중심으로 보여주는 노트형 구성</p>
           </div>
         </div>
@@ -966,10 +1184,10 @@
         </div>
       </section>
 
-      <section class="section" id="projects">
+      <section class="section reveal" id="projects">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Projects</h2>
+            <h2 class="section-title">프로젝트</h2>
             <p class="section-sub">사진 카드처럼 보이도록 구성한 프로젝트 영역</p>
           </div>
         </div>
@@ -981,9 +1199,9 @@
             </div>
             <div class="project-body">
               <div class="project-meta">
-                <span class="chip">Live Commerce</span>
-                <span class="chip">Content</span>
-                <span class="chip">Promotion</span>
+                <span class="chip">라이브커머스</span>
+                <span class="chip">콘텐츠</span>
+                <span class="chip">프로모션</span>
               </div>
               <h3>라이브커머스 운영 지원 경험</h3>
               <p>
@@ -1004,9 +1222,9 @@
             </div>
             <div class="project-body">
               <div class="project-meta">
-                <span class="chip">Excel</span>
-                <span class="chip">Data</span>
-                <span class="chip">Operation</span>
+                <span class="chip">엑셀</span>
+                <span class="chip">데이터</span>
+                <span class="chip">운영</span>
               </div>
               <h3>운영 데이터 정리 경험</h3>
               <p>
@@ -1023,31 +1241,31 @@
         </div>
       </section>
 
-      <section class="section" id="contact">
+      <section class="section reveal" id="contact">
         <div class="section-head">
           <div>
-            <h2 class="section-title">Contact</h2>
+            <h2 class="section-title">연락처</h2>
             <p class="section-sub">마지막까지 정리된 인상을 주는 마무리 페이지</p>
           </div>
         </div>
 
         <div class="contact-wrap">
           <div class="contact-card">
-            <h2>Let’s work together</h2>
+            <h2>함께 성장하고 싶습니다</h2>
             <p>
               소비자 관점과 운영 경험을 바탕으로
               브랜드와 함께 성장하는 MD가 되고 싶습니다.
             </p>
             <div class="contact-info">
               <div><strong>이름</strong> · 김유림</div>
-              <div><strong>Email</strong> · yourmail@example.com</div>
-              <div><strong>Phone</strong> · 010-0000-0000</div>
-              <div><strong>Portfolio</strong> · 웹 링크 또는 깃허브 주소</div>
+              <div><strong>이메일</strong> · yourmail@example.com</div>
+              <div><strong>연락처</strong> · 010-0000-0000</div>
+              <div><strong>포트폴리오</strong> · 웹 링크 또는 깃허브 주소</div>
             </div>
           </div>
 
           <div class="contact-note">
-            <h3>마무리 문구 예시</h3>
+            <h3>마무리 문구</h3>
             <p>
               상품과 소비자를 연결하는 과정에 늘 관심을 가져왔고,
               실무 경험을 통해 그 흐름을 직접 이해할 수 있었습니다.
@@ -1068,5 +1286,22 @@
   <footer>
     © 2026 KIM YURIM PORTFOLIO. All rights reserved.
   </footer>
+
+  <script>
+    const revealItems = document.querySelectorAll('.reveal');
+
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, {
+      threshold: 0.12
+    });
+
+    revealItems.forEach((item) => revealObserver.observe(item));
+  </script>
 </body>
 </html>
